@@ -1,6 +1,6 @@
 import random
 import sys
-
+import pygame
 from constant import HEIGHT, WIDTH, BLACK, WHITE, RED, GREEN, RestartGameSingle
 from save import getBestScores, saveGame
 
@@ -161,7 +161,34 @@ class Menu:
         scoreRect.center = (WIDTH//2, (HEIGHT//2) + 25)
         self.screen.blit(currentScore, scoreRect)
 
+        nickname = self.font.render("what is your name ", False, WHITE)
+        nicknameRect = nickname.get_rect()
+        nicknameRect.center = (WIDTH // 2, (HEIGHT // 2) + 70)
+        self.screen.blit(nickname, nicknameRect)
         self.pygame.display.update()
+
+        # insert nicknake
+        temp = ''
+        while True:
+
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        return temp
+                    elif event.key == pygame.K_BACKSPACE:
+                        temp = temp[:-1]
+                    else:
+                        temp += event.unicode
+
+            inputName = self.font.render(temp, False, WHITE)
+            inputNameRect = inputName.get_rect()
+            inputNameRect.center = (WIDTH // 2, (HEIGHT // 2) + 140)
+            self.screen.blit(inputName, inputNameRect)
+            self.pygame.display.update()
+
+        self.pygame.display.update()
+
+
 
     def displayGameOverDualMode(self, playerO, playerT):
         self.screen.fill(BLACK)

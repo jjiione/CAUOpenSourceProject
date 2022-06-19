@@ -160,8 +160,9 @@ def singlePlay(pygame, screen, menu, loadSave):
 
     # End the game
     if not RestartGameSingle and player.state[0]['x'] != -5:
-        menu.displayGameOver(player.size)
-        addNewScore(Score("Solo Player", player.size))
-        time.sleep(2)
+        name = menu.displayGameOver(player.size-1)
+        # print(name)
+        addNewScore(Score(name, player.size-1))
+        # time.sleep(3)
 
     return RestartGameSingle
